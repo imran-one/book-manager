@@ -1,3 +1,5 @@
+export const generateId = () => Date.now().toString();
+
 export const validateBook = ({ title, author, year }) => {
   const errors = {};
 
