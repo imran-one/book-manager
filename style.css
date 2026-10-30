@@ -10,9 +10,10 @@
   --danger-dark: #c0392b;
   --border: #dcdde1;
   --radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* ===== Reset de base ===== */
+/* ===== Reset ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,6 +35,10 @@ h1 {
   margin-bottom: 24px;
 }
 
+.hidden {
+  display: none;
+}
+
 /* ===== Formulaire ===== */
 #book-form {
   display: grid;
@@ -42,13 +47,16 @@ h1 {
   background: var(--card);
   padding: 20px;
   border-radius: var(--radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow);
   margin-bottom: 24px;
 }
 
 #book-form textarea,
 #book-form select,
-#book-form button {
+#book-form button,
+#book-form .error,
+#title,
+#author {
   grid-column: 1 / -1;
 }
 
@@ -76,11 +84,11 @@ textarea:focus {
   border-color: var(--primary);
 }
 
-/* ===== Erreurs de validation ===== */
+/* ===== Erreurs ===== */
 .error {
   color: var(--danger);
   font-size: 0.85rem;
-  grid-column: 1 / -1;
+  margin-top: -6px;
 }
 
 input.invalid,
@@ -105,19 +113,23 @@ button:hover {
   background: var(--primary-dark);
 }
 
-button.btn-danger {
+.btn-danger {
   background: var(--danger);
 }
 
-button.btn-danger:hover {
+.btn-danger:hover {
   background: var(--danger-dark);
 }
 
-button.btn-secondary {
+.btn-secondary {
   background: var(--muted);
 }
 
-/* ===== Toolbar (recherche + tri) ===== */
+.btn-secondary:hover {
+  background: #4b5559;
+}
+
+/* ===== Toolbar ===== */
 .toolbar {
   display: flex;
   gap: 12px;
@@ -129,10 +141,10 @@ button.btn-secondary {
 }
 
 .toolbar select {
-  width: 160px;
+  width: 180px;
 }
 
-/* ===== Liste des livres ===== */
+/* ===== Liste ===== */
 #book-list {
   list-style: none;
   display: grid;
@@ -143,7 +155,7 @@ button.btn-secondary {
   background: var(--card);
   padding: 16px;
   border-radius: var(--radius);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -159,6 +171,11 @@ button.btn-secondary {
   font-size: 0.9rem;
 }
 
+.book-desc {
+  margin-top: 4px;
+  font-style: italic;
+}
+
 .book-actions {
   display: flex;
   gap: 8px;
@@ -170,7 +187,7 @@ button.btn-secondary {
   font-size: 0.85rem;
 }
 
-/* ===== Badges de statut ===== */
+/* ===== Badges ===== */
 .status {
   display: inline-block;
   padding: 2px 10px;
@@ -195,8 +212,8 @@ button.btn-secondary {
   color: #1e6b1e;
 }
 
-/* ===== Message liste vide ===== */
-.empty {
+#book-list li.empty {
+  display: block;
   text-align: center;
   color: var(--muted);
   padding: 32px;
@@ -206,6 +223,11 @@ button.btn-secondary {
 @media (max-width: 600px) {
   #book-form {
     grid-template-columns: 1fr;
+  }
+
+  #year,
+  #genre {
+    grid-column: 1 / -1;
   }
 
   .toolbar {
