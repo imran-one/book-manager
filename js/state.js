@@ -1,6 +1,6 @@
-import { generateId } from './utils.js';
+import { generateId } from "./utils.js";
 
-const STORAGE_KEY = 'books';
+const STORAGE_KEY = "books";
 
 export const loadBooks = () => {
   const data = localStorage.getItem(STORAGE_KEY);
@@ -18,10 +18,10 @@ export const addBook = (bookData) => {
     id: generateId(),
     title: bookData.title.trim(),
     author: bookData.author.trim(),
-     year: bookData.year === '' ? null : Number(bookData.year),
-      genre: bookData.genre.trim(),
-      description:bookData.description.trim(),
-       status : bookData.status,
+    year: bookData.year === "" ? null : Number(bookData.year),
+    genre: bookData.genre.trim(),
+    description: bookData.description.trim(),
+    status: bookData.status,
   };
 
   const updatedBooks = [...books, newBook];
