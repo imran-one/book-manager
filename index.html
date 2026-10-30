@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <h1>Ma collection de livres</h1>
 
-  <form id="book-form">
+  <form id="book-form" novalidate>
     <input type="text" id="title" placeholder="Titre *">
+    <p id="erreur-title" class="error hidden"></p>
+
     <input type="text" id="author" placeholder="Auteur *">
+    <p id="erreur-author" class="error hidden"></p>
+
     <input type="number" id="year" placeholder="Année">
     <input type="text" id="genre" placeholder="Genre">
+    <p id="erreur-year" class="error hidden"></p>
+
     <textarea id="description" placeholder="Description"></textarea>
     <select id="status">
       <option value="to-read">À lire</option>
       <option value="reading">En cours</option>
       <option value="read">Lu</option>
     </select>
-    <button type="submit">Ajouter</button>
+
+    <button type="submit" id="submit">Ajouter</button>
+    <button type="button" id="cancel-btn" class="btn-secondary hidden">Annuler la modification</button>
   </form>
 
   <div class="toolbar">
-    <input type="search" id="search" placeholder="Rechercher...">
+    <input type="search" id="search" placeholder="Rechercher par titre ou auteur...">
     <select id="sort">
-      <option value="title">Titre</option>
-      <option value="author">Auteur</option>
-      <option value="year">Année</option>
+      <option value="title">Trier par titre</option>
+      <option value="author">Trier par auteur</option>
+      <option value="year">Trier par année</option>
     </select>
   </div>
 
@@ -36,4 +46,5 @@
 
   <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
