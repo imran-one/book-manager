@@ -11,20 +11,32 @@ export const saveBooks = (books) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
 };
 
+const normalize = (bookData) => ({
+  title: bookData.title.trim(),
+  author: bookData.author.trim(),
+  year: bookData.year === "" ? null : Number(bookData.year),
+  genre: bookData.genre.trim(),
+  description: bookData.description.trim(),
+  status: bookData.status,
+});
+
 export const addBook = (bookData) => {
-  const books = loadBooks();
+  const newBook = { id: generateId(), ...normalize(bookData) };
+  const updatedBooks = [...loadBooks(), newBook];
+  saveBooks(updatedBooks);
+  return updatedBooks;
+};
 
-  const newBook = {
-    id: generateId(),
-    title: bookData.title.trim(),
-    author: bookData.author.trim(),
-    year: bookData.year === "" ? null : Number(bookData.year),
-    genre: bookData.genre.trim(),
-    description: bookData.description.trim(),
-    status: bookData.status,
-  };
+export const updateBook = (id, bookData) => {
+  const updatedBooks = loadBooks().map((book) =>
+    book.id === id ? { ...book, ...normalize(bookData) } : book,
+  );
+  saveBooks(updatedBooks);
+  return updatedBooks;
+};
 
-  const updatedBooks = [...books, newBook];
+export const deleteBook = (id) => {
+  const updatedBooks = loadBooks().filter((book) => book.id !== id);
   saveBooks(updatedBooks);
   return updatedBooks;
 };
